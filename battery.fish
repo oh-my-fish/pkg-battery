@@ -28,15 +28,43 @@ function init --on-event init_battery
 end
 
 function battery_update_info
-  if test $OSTYPE = "Darwin"
-    battery_update_info_darwin
-  else
-    battery_update_info_linux
-  end
+	test -z "$OSTYPE"; and set OSTYPE (uname)
+	if test $OSTYPE = "Darwin"
+		battery_update_info_darwin
+	else if test $OSTYPE = "Linux"
+		battery_update_info_linux
+	else
+		echo "Unknown operating system: $OSTYPE"
+	end
 end
 
 function battery_update_info_linux
-  # TODO
+	if not type -q upower
+		echo "Please install upower"
+		return 1
+	end
+	set -l devices (upower -e | grep battery)
+	set -l upo (upower -i $devices)
+
+	printf "%s"\n $upo | grep -q "charging"
+	and set -g BATTERY_IS_PLUGGED
+
+	set -g BATTERY_MAX_CAP (printf "%s\n" $upo \
+	| grep "energy-full:" \
+	| cut -d ":" -f 2)
+
+	set -g BATTERY_CUR_CAP (printf "%s\n" $upo \
+	| grep "energy:" \
+	| cut -d ":" -f 2)
+
+	set -g BATTERY_PCT (printf "%s\n" $upo \
+	| grep "percentage:" | cut -d":" -f2 | cut -d"%" -f1)
+
+	set -g BATTERY_TIME_LEFT (printf "%s\n" $upo \
+	| grep "time to" \
+	| cut -d":" -f 2)
+
+	set -g BATTERY_SLOTS (math $BATTERY_PCT / 10)
 end
 
 function battery_update_info_darwin
@@ -77,11 +105,6 @@ function battery -a \
   empty_slot_ch     \
   show_empty_slots  \
   red yellow green
-
-  if test $OSTYPE != "Darwin"
-    echo (set_color red)"Error: Battery package Linux support in progress."(set_color normal)
-    return 1
-  end
 
   if test -z "$filled_slot_ch"
     set filled_slot_ch ▮
