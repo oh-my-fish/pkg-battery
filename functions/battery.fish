@@ -29,22 +29,22 @@ function battery -a filled_slot_char \
                     red yellow green
 
   test -z "$filled_slot_char";
-    or set filled_slot_char ▮
+    and set filled_slot_char ▮
 
   test -z "$empty_slot_char";
-    or set empty_slot_char ▯
+    and set empty_slot_char ▯
 
   test -z "$show_empty_slots";
-    or set show_empty_slots true
+    and set show_empty_slots true
 
   test -z "$red";
-    or set red (set_color -o f00)
+    and set red (set_color -o f00)
 
   test -z "$yellow";
-    or set yellow (set_color -o ff0)
+    and set yellow (set_color -o ff0)
 
   test -z "$green";
-    or set green (set_color -o 0f0)
+    and set green (set_color -o 0f0)
 
   set -l normal   (set_color normal)
   set -l color    $green
