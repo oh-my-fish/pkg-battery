@@ -1,14 +1,18 @@
-[![](https://img.shields.io/badge/Wahoo-Package-00b0ff.svg?style=flat-square)][Wahoo]
-![](https://img.shields.io/badge/License-MIT-707070.svg?style=flat-square)
+<img src="https://dl.dropboxusercontent.com/u/56336/omf/omf-logo-optimised.svg" align="left" width="144px" height="144px"/>
 
-# :battery: _battery_ ▮▮▮▮▮▮▯▯▯▯
+#### Battery
+> OS X and Linux compatible battery utility
 
-OS X and Linux compatible battery utility.
+[![MIT License](https://img.shields.io/badge/license-MIT-007EC7.svg?style=flat-square)](/LICENSE)
+[![Fish Shell Version](https://img.shields.io/badge/fish-v2.2.0-007EC7.svg?style=flat-square)](http://fishshell.com)
+[![Oh My Fish Framework](https://img.shields.io/badge/Oh%20My%20Fish-Framework-007EC7.svg?style=flat-square)](https://www.github.com/oh-my-fish/oh-my-fish)
+
+<br/>
 
 ## Install
 
 ```fish
-wa g battery
+omf install battery
 ```
 
 ## Usage
@@ -16,18 +20,13 @@ wa g battery
 Display `battery` slots.
 
 ```fish
-if available battery
-  battery
-end
+battery
 ```
-
 
 Customize `battery` options.
 
 ```fish
-if available battery
-  battery ▶ ▷
-end
+battery ▶ ▷
 ```
 
 Check if the battery is currently charging.
@@ -67,7 +66,10 @@ Current battery life in `%`.
 
 # License
 
-[MIT](http://opensource.org/licenses/MIT) © [Jorge Bucaran][Author]
+[MIT][mit] © [Jorge Bucaran][author]
 
-[Author]: https://github.com/bucaran
-[Wahoo]: https://github.com/bucaran/wahoo
+
+[mit]:            http://opensource.org/licenses/MIT
+[author]:         http://github.com/bucaran
+[omf-link]:       https://www.github.com/oh-my-fish/oh-my-fish
+[contributors]:   https://github.com/oh-my-fish/plugin-battery/graphs/contributors
