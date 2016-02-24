@@ -1,5 +1,5 @@
 function battery.info.update.linux
-  if not available upower
+  if not type -q upower
     echo "Please install upower"
     return 1
   end
