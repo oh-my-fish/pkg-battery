@@ -5,7 +5,7 @@
 #   OS X and Linux compatible battery utility.
 #
 # USAGE
-#   if available battery
+#   if type -q battery
 #     battery
 #   end
 #
