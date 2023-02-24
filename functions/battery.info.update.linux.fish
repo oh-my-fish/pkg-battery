@@ -25,5 +25,9 @@ function battery.info.update.linux
   | grep "time to" \
   | cut -d":" -f 2)
 
-  set -g BATTERY_SLOTS (math $BATTERY_PCT / 10)
+  if test "$BATTERY_PCT" != ""
+      set -g BATTERY_SLOTS (math $BATTERY_PCT / 10)
+  else
+      set -g BATTERY_SLOTS 1
+  end
 end
